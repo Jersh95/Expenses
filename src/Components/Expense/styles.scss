@@ -8,3 +8,11 @@ input[type="number"]::-webkit-outer-spin-button {
 div.DayPickerInput > input{
   @extend .form-control
 }
+
+#expense-container, #expense-list {
+  margin-top: 10px;
+}
+
+.expense-item {
+  margin-top: 10px;
+}

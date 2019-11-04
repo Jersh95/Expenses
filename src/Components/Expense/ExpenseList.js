@@ -10,14 +10,14 @@ export const ExpenseList = (props) => {
   const expenses = props.expenses;
 
   return(
-    <React.Fragment>
+    <div id="expense-list">
       {expenses.length > 0 ? (
         <React.Fragment>
           <Container>
             <CardGroup>
               {expenses.map((expense) => {
                 return (
-                  <Col xs={12} sm={4} key={`expense-${expense.company}`}>
+                  <Col xs={12} sm={4} key={`expense-${expense.company}`} className="expense-item">
                     <Card bg="dark" text="white">
                       <Card.Header>{expense.company}</Card.Header>
                       <Card.Body>
@@ -46,6 +46,6 @@ export const ExpenseList = (props) => {
           <p>You have no expenses.</p>
         </React.Fragment>
       )}
-    </React.Fragment>
+    </div>
   )
 }

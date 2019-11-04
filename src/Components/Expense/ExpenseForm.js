@@ -32,10 +32,6 @@ export const ExpenseForm = (props) => {
               </Form.Group>
             </Row>
             <Row>
-              <Form.Group as={Col} xs='6' controlId="expenseFormAmount">
-                <Form.Label>Amount</Form.Label>
-                <Form.Control required type="number" placeholder="Amount"/>
-              </Form.Group>
               <Form.Group as={Col} xs='6' controlId="expenseFormDate">
                 <Form.Label>Date</Form.Label>
                 <DayPickerInput
@@ -44,6 +40,10 @@ export const ExpenseForm = (props) => {
                   formatDate={formatDate}
                   parseDate={parseDate}
                 />
+              </Form.Group>
+              <Form.Group as={Col} xs='6' controlId="expenseFormAmount">
+                <Form.Label>Amount</Form.Label>
+                <Form.Control required type="number" placeholder="Amount"/>
               </Form.Group>
               <Form.Group  as={Col} xs='6' controlId="expenseFormDate">
                 <Form.Control type='hidden'/>
@@ -61,7 +61,7 @@ export const ExpenseForm = (props) => {
               </Form.Group>
             </Row>
 
-            <Button variant="primary" type="submit" id="expenseFormSubmit">
+            <Button variant="dark" type="submit" id="expenseFormSubmit">
               Save Expense
             </Button>
           </Form>

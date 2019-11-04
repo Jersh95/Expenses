@@ -49,12 +49,10 @@ class ExpenseContainer extends React.Component {
   render() {
     const {expenses} = this.state;
     return (
-      <div id='expense-container'>
-        <React.Fragment>
-          <Button id="expense-container__add-expense" variant="primary" onClick={this.handleShow}>Add Expense</Button>
+      <div id="expense-container" class="text-center">
+          <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
           <ExpenseForm showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
-        </React.Fragment>
-        <ExpenseList expenses={expenses}/>
+          <ExpenseList expenses={expenses}/>
       </div>
     );
   }
