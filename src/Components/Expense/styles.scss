@@ -1,0 +1,10 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+div.DayPickerInput > input{
+  @extend .form-control
+}
