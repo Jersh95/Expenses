@@ -4,10 +4,11 @@ import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
 
 export const ExpenseList = (props) => {
 
-  const expenses = props.expenses;
+  const {expenses, editExpense, removeExpense} = props;
 
   return(
     <div id="expense-list">
@@ -33,6 +34,14 @@ export const ExpenseList = (props) => {
                           </Col>
                         </Row>
                       </Card.Body>
+                      <Card.Footer>
+                        <Button size="sm" variant="light" className="float-left" onClick={() => editExpense(expense)}>
+                          <i className="fas fa-pencil-alt"/>
+                        </Button>
+                        <Button size="sm" variant="light" className="float-right" onClick={() => removeExpense(expense)}>
+                          <i className="fas fa-trash"/>
+                        </Button>
+                      </Card.Footer>
                     </Card>
                   </Col>
                 )

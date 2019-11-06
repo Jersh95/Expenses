@@ -9,6 +9,7 @@ class ExpenseContainer extends React.Component {
 
   state = {
     showModal: false,
+    editExpense: undefined,
     expenses: []
   };
 
@@ -42,17 +43,26 @@ class ExpenseContainer extends React.Component {
     return amount;
   };
 
+  editExpense = (expense) => {
+    this.setState({editExpense: expense});
+    this.handleShow();
+  };
+
+  removeExpense = (expense) => {
+    this.setState({expenses:  this.state.expenses.indexOf(expense)});
+  };
+
   componentDidMount() {
 
   }
 
   render() {
-    const {expenses} = this.state;
+    const {expenses, editExpense} = this.state;
     return (
-      <div id="expense-container" class="text-center">
+      <div id="expense-container" className="text-center">
           <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
-          <ExpenseForm showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
-          <ExpenseList expenses={expenses}/>
+          <ExpenseForm editExpense={editExpense} showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
+          <ExpenseList expenses={expenses} editExpense={this.editExpense} removeExpense={this.removeExpense}/>
       </div>
     );
   }
