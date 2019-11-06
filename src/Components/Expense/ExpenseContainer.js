@@ -49,7 +49,9 @@ class ExpenseContainer extends React.Component {
   };
 
   removeExpense = (expense) => {
-    this.setState({expenses:  this.state.expenses.indexOf(expense)});
+    let expenses = this.state.expenses;
+    expenses.splice(expenses.indexOf(expense), 1);
+    this.setState({expenses: expenses});
   };
 
   componentDidMount() {
