@@ -4,13 +4,18 @@ import Button from "react-bootstrap/Button";
 import './styles.scss';
 import Expense from "./Expense";
 import {ExpenseList} from "./ExpenseList";
+import {UserConsumer} from "../../UserContext";
 
 class ExpenseContainer extends React.Component {
 
-  state = {
-    showModal: false,
-    editExpense: undefined,
-    expenses: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: props.user,
+      showModal: false,
+      editExpense: undefined,
+      expenses: []
+    }
   };
 
   handleClose = () => this.setState({showModal: false});
@@ -59,13 +64,18 @@ class ExpenseContainer extends React.Component {
   }
 
   render() {
-    const {expenses, editExpense} = this.state;
+    const {expenses, editExpense, user} = this.state;
+    console.log("expenses user", user)
     return (
-      <div id="expense-container" className="text-center">
-          <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
-          <ExpenseForm editExpense={editExpense} showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
-          <ExpenseList expenses={expenses} editExpense={this.editExpense} removeExpense={this.removeExpense}/>
-      </div>
+      <UserConsumer>
+        {({user}) =>
+          <div id="expense-container" className="text-center">
+            <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
+            <ExpenseForm editExpense={editExpense} showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
+            <ExpenseList expenses={expenses} editExpense={this.editExpense} removeExpense={this.removeExpense}/>
+          </div>
+        }
+      </UserConsumer>
     );
   }
 }
