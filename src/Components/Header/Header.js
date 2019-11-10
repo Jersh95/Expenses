@@ -12,30 +12,7 @@ class Header extends React.Component {
   };
 
   componentDidMount = () => {
-    // firebase.auth().onAuthStateChanged((resp) => {
-    //   this.setState({user: resp});
-    // })
-  };
 
-  signIn = () => {
-    // firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    //   .then(() => {
-    //     let provider = new firebase.auth.GoogleAuthProvider();
-    //     firebase.auth().signInWithPopup(provider)
-    //       .then(result => {
-    //         let token = result.credential.accessToken;
-    //         this.setState({user: result.user});
-    //       })
-    //       .catch((error) => {
-    //         let errorCode = error.code;
-    //         let errorMessage = error.message;
-    //         console.log(errorCode + ":" + errorMessage)
-    //       });
-    //   });
-  };
-
-  signOut = () => {
-    // firebase.auth().signOut();
   };
 
   render() {

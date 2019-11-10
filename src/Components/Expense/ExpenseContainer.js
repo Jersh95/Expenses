@@ -2,7 +2,7 @@ import React from 'react';
 import {ExpenseForm} from "./ExpenseForm";
 import Button from "react-bootstrap/Button";
 import './styles.scss';
-import Expense from "./Expense";
+import Expense from "../../ClassWrappers/Expense";
 import {ExpenseList} from "./ExpenseList";
 import {UserConsumer} from "../../UserContext";
 
