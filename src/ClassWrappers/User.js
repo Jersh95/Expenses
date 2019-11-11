@@ -1,8 +1,8 @@
 export default class User {
-  constructor(firebaseUser) {
-    this.uid = firebaseUser.uid;
-    this.displayName = firebaseUser.displayName;
-    this.email = firebaseUser.email;
-    this.expenses = firebaseUser.expenses;
+  constructor(uid, displayName, email, expenses) {
+    this.uid = uid;
+    this.displayName = displayName;
+    this.email = email;
+    this.expenses = expenses;
   }
 }

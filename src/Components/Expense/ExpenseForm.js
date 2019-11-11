@@ -9,9 +9,35 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import Row from "react-bootstrap/Row";
 import {formatDate, parseDate} from 'react-day-picker/moment';
+import Expense from "../../ClassWrappers/Expense";
 
 export const ExpenseForm = (props) => {
-  const {editExpense, showModal, handleClose, handleSubmit} = props;
+  const {editExpense, showModal, handleClose, addExpense, user} = props;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const expense = new Expense(
+      form.elements.expenseFormUid.value,
+      form.elements.expenseFormCompany.value.trim(),
+      formatAmount(form.elements.expenseFormAmount.value.trim()),
+      form.elements.expenseFormDate.value.trim(),
+      form.elements.expenseFormNote.value.trim(),
+      form.elements.expenseFormReoccurring.checked);
+
+    if(addExpense)
+      await addExpense(user, expense);
+    handleClose();
+  };
+
+  const formatAmount = (amount) => {
+    if(amount.indexOf('.') < 0) {
+      amount = amount.concat(".00");
+    }
+
+    return amount;
+  };
 
   const handleDatePicked = (day) => {
     document.querySelector("#expenseFormDate").value = formatDate(day);
@@ -58,11 +84,11 @@ export const ExpenseForm = (props) => {
             </Row>
             <Row>
               <Form.Group as={Col} xs={'12'} controlId="expenseFormReoccurring">
-                <Form.Check type="checkbox" label="Reoccurring Expense" defaultChecked={editExpense ? editExpense.idReoccurring : false} />
+                <Form.Check type="checkbox" label="Reoccurring Expense" defaultChecked={editExpense ? editExpense.isReoccurring : false} />
               </Form.Group>
             </Row>
-            <FormGroup>
-              <Form.Control type="hidden" defaultValue={editExpense ? editExpense.id : undefined}/>
+            <FormGroup controlId="expenseFormUid">
+              <Form.Control type="hidden" defaultValue={editExpense ? editExpense.uid : undefined}/>
             </FormGroup>
             <Button variant="dark" type="submit" id="expenseFormSubmit">
               Save Expense

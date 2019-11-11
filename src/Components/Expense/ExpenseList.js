@@ -8,15 +8,14 @@ import Button from "react-bootstrap/Button";
 
 export const ExpenseList = (props) => {
 
-  const {expenses, editExpense, removeExpense} = props;
-
+  const {user, editExpense, deleteExpense} = props;
   return(
     <div id="expense-list">
-      {expenses.length > 0 ? (
+      {user.expenses.length > 0 ? (
         <React.Fragment>
           <Container>
             <CardGroup>
-              {expenses.map((expense) => {
+              {user.expenses.map((expense) => {
                 return (
                   <Col xs={12} sm={4} key={`expense-${expense.company}`} className="expense-item">
                     <Card bg="dark" text="white">
@@ -38,7 +37,7 @@ export const ExpenseList = (props) => {
                         <Button size="sm" variant="light" className="float-left" onClick={() => editExpense(expense)}>
                           <i className="fas fa-pencil-alt"/>
                         </Button>
-                        <Button size="sm" variant="light" className="float-right" onClick={() => removeExpense(expense)}>
+                        <Button size="sm" variant="light" className="float-right" onClick={() => deleteExpense(user, expense)}>
                           <i className="fas fa-trash"/>
                         </Button>
                       </Card.Footer>

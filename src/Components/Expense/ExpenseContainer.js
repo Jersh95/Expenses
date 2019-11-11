@@ -5,58 +5,26 @@ import './styles.scss';
 import Expense from "../../ClassWrappers/Expense";
 import {ExpenseList} from "./ExpenseList";
 import {UserConsumer} from "../../UserContext";
+import Spinner from "react-bootstrap/Spinner";
 
 class ExpenseContainer extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user,
       showModal: false,
       editExpense: undefined,
       expenses: []
     }
   };
 
-  handleClose = () => this.setState({showModal: false});
+  handleClose = () => this.setState({showModal: false, editExpense: undefined});
 
   handleShow = () => this.setState({showModal: true});
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-
-    const form = e.currentTarget;
-    const expense = new Expense(
-      undefined,
-      form.elements.expenseFormCompany.value.trim(),
-      this.formatAmount(form.elements.expenseFormAmount.value.trim()),
-      form.elements.expenseFormDate.value.trim(),
-      form.elements.expenseFormNote.value.trim(),
-      form.elements.expenseFormReoccurring.checked);
-
-    let expenses = this.state.expenses;
-    expenses.push(expense);
-    this.setState({expenses: expenses});
-    this.handleClose();
-  };
-
-  formatAmount = (amount) => {
-    if(amount.indexOf('.') < 0) {
-      amount = amount.concat(".00");
-    }
-
-    return amount;
-  };
 
   editExpense = (expense) => {
     this.setState({editExpense: expense});
     this.handleShow();
-  };
-
-  removeExpense = (expense) => {
-    let expenses = this.state.expenses;
-    expenses.splice(expenses.indexOf(expense), 1);
-    this.setState({expenses: expenses});
   };
 
   componentDidMount() {
@@ -64,16 +32,30 @@ class ExpenseContainer extends React.Component {
   }
 
   render() {
-    const {expenses, editExpense, user} = this.state;
-    console.log("expenses user", user)
+    const {editExpense} = this.state;
     return (
       <UserConsumer>
-        {({user}) =>
+        {({user, addExpense, deleteExpense}) => {
+          return (
           <div id="expense-container" className="text-center">
-            <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
-            <ExpenseForm editExpense={editExpense} showModal={this.state.showModal} handleClose={this.handleClose} handleSubmit={this.handleSubmit}/>
-            <ExpenseList expenses={expenses} editExpense={this.editExpense} removeExpense={this.removeExpense}/>
+            {user === undefined &&
+            <Spinner variant="light" animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+            }
+            {user === null &&
+            <p>Sign in to manage expenses</p>
+            }
+            {user &&
+            <React.Fragment>
+              <Button id="expense-container__add-expense" variant="dark" onClick={this.handleShow}>Add Expense</Button>
+              <ExpenseForm showModal={this.state.showModal} handleClose={this.handleClose}
+                           handleSubmit={this.handleSubmit} editExpense={this.state.editExpense} addExpense={addExpense} user={user}/>
+              <ExpenseList user={user} editExpense={this.editExpense} deleteExpense={deleteExpense}/>
+            </React.Fragment>
+              }
           </div>
+          )}
         }
       </UserConsumer>
     );
