@@ -32,10 +32,13 @@ export class UserProvider extends React.Component {
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithPopup(provider)
           .then(async result => {
-            await readExpenses(result.user).then(expenses => {
-              const dbUser = result.user;
-              this.setState({user: new User(dbUser.uid, dbUser.displayName, dbUser.email, expenses)});
-            });
+            await readUser(result.user)
+              .then(async (user) => {
+                await readExpenses(user).then(expenses => {
+                  const dbUser = result.user;
+                  this.setState({user: new User(dbUser.uid, dbUser.displayName, dbUser.email, expenses)});
+                });
+              })
           })
           .catch((error) => {
             let errorCode = error.code;
