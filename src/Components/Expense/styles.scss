@@ -16,3 +16,43 @@ div.DayPickerInput > input{
 .expense-item {
   margin-top: 10px;
 }
+
+.react-calendar {
+  width: 90vw !important;
+  margin: 0 auto;
+
+  .react-calendar__tile {
+    height: 5rem !important;
+  }
+
+  .react-calendar__tile--active, .react-calendar__tile--active:enabled:focus {
+    background: white;
+  }
+
+  .react-calendar__tile--active:enabled:hover {
+    background: #cccccc;
+  }
+
+  //.react-calendar__tile time {
+  //  display: none;
+  //}
+
+  //.react-calendar__tile.react-calendar__month-view__days__day abbr {
+  //  display: none;
+  //}
+
+  .react-calendar__tile--active {
+    color: inherit;
+  }
+
+  .react-calendar__tile__date {
+    text-align: center;
+    height: 35px;
+    width: 35px;
+    background-color: #ff8080;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

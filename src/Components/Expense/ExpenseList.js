@@ -8,16 +8,16 @@ import Button from "react-bootstrap/Button";
 
 export const ExpenseList = (props) => {
 
-  const {user, editExpense, deleteExpense} = props;
+  const {user, editExpense, deleteExpense, displayExpenses} = props;
   return(
     <div id="expense-list">
       {user.expenses.length > 0 ? (
         <React.Fragment>
           <Container>
             <CardGroup>
-              {user.expenses.map((expense) => {
+              {displayExpenses.map((expense) => {
                 return (
-                  <Col xs={12} sm={4} key={`expense-${expense.company}`} className="expense-item">
+                  <Col xs={12} key={`expense-${expense.company}`} className="expense-item">
                     <Card bg="dark" text="white">
                       <Card.Header>{expense.company}</Card.Header>
                       <Card.Body>
@@ -25,10 +25,10 @@ export const ExpenseList = (props) => {
                           <Col xs={6}>
                             <span>${expense.amount}</span>
                           </Col>
-                          <Col xs={6}>
+                          <Col xs={6} className='text-right'>
                             <span>{expense.date}</span>
                           </Col>
-                          <Col xs={12}>
+                          <Col xs={12} className='text-center'>
                             <span>{expense.note}</span>
                           </Col>
                         </Row>
