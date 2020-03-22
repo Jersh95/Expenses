@@ -2,6 +2,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The purpose of this project is a basic expense tracker website.  
 
+Live at: https://expense-dash.firebaseapp.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
