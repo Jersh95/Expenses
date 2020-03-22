@@ -26,7 +26,8 @@ div.DayPickerInput > input{
   }
 
   .react-calendar__tile--active, .react-calendar__tile--active:enabled:focus {
-    background: white;
+    //background: white;
+    background: inherit;
   }
 
   .react-calendar__tile--active:enabled:hover {
