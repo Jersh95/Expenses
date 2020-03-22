@@ -25,6 +25,14 @@ div.DayPickerInput > input{
     height: 5rem !important;
   }
 
+  .react-calendar__tile--active, .react-calendar__tile--active {
+    background: white;
+  }
+
+  .react-calendar__tile--active, .react-calendar__tile--active:disabled {
+    background: #f0f0f0;
+  }
+
   .react-calendar__tile--active, .react-calendar__tile--active:enabled:focus {
     //background: white;
     background: inherit;
@@ -44,6 +52,7 @@ div.DayPickerInput > input{
 
   .react-calendar__tile--active {
     color: inherit;
+    //background: inherit;
   }
 
   .react-calendar__tile--now {
