@@ -37,7 +37,7 @@ export const ExpenseList = (props) => {
                         <Button size="sm" variant="light" className="float-left" onClick={() => editExpense(expense)}>
                           <i className="fas fa-pencil-alt"/>
                         </Button>
-                        <Button size="sm" variant="light" className="float-right" onClick={() => deleteExpense(user, expense)}>
+                        <Button size="sm" variant="light" className="float-right" onClick={() => deleteExpense(expense)}>
                           <i className="fas fa-trash"/>
                         </Button>
                       </Card.Footer>

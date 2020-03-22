@@ -54,13 +54,14 @@ export const ExpenseForm = (props) => {
             <Row>
               <Form.Group as={Col} xs='12' controlId="expenseFormCompany">
                 <Form.Label>Company</Form.Label>
-                <Form.Control required type="text" placeholder="Company" defaultValue={expenseToEdit ? expenseToEdit.company : undefined}/>
+                <Form.Control required pattern="[a-zA-Z0-9\s]+" title="Only alphanumeric characters are allowed." placeholder="Company" defaultValue={expenseToEdit ? expenseToEdit.company : undefined}/>
               </Form.Group>
             </Row>
             <Row>
               <Form.Group as={Col} xs='6' controlId="expenseFormDate">
                 <Form.Label>Date</Form.Label>
                 <DayPickerInput
+                  inputProps={{pattern:"^\\d{2}\\/\\d{2}\\/\\d{4}$", title:"Ex: 01/01/2020"}}
                   onDayChange={day => handleDatePicked(day)}
                   placeholder={"Date"}
                   formatDate={formatDate}
@@ -70,7 +71,7 @@ export const ExpenseForm = (props) => {
               </Form.Group>
               <Form.Group as={Col} xs='6' controlId="expenseFormAmount">
                 <Form.Label>Amount</Form.Label>
-                <Form.Control required type="number" placeholder="Amount" defaultValue={expenseToEdit ? expenseToEdit.amount : undefined}/>
+                <Form.Control required pattern="^\d+(\.\d{2}$)?" title="Ex: 10.00" placeholder="Amount" defaultValue={expenseToEdit ? expenseToEdit.amount : undefined}/>
               </Form.Group>
               <Form.Group  as={Col} xs='6' controlId="expenseFormDate">
                 <Form.Control type='hidden' defaultValue={expenseToEdit ? expenseToEdit.date : undefined}/>

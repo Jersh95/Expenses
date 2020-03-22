@@ -9,6 +9,7 @@ class CalendarView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      prevExpCount: undefined,
       user: this.props.user,
       showModal: false,
       reoccurringExpenses: [],
@@ -22,17 +23,27 @@ class CalendarView extends React.Component {
     this.setupExpensesForMonth(formatDate(this.state.date));
   };
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(this.state.prevExpCount !== this.state.user.expenses.length) {
+      this.setupExpensesForMonth(formatDate(this.state.date));
+    }
+  }
+
   setupExpensesForMonth = (date) => {
     let expenses = this.state.user.expenses;
     if(date && expenses) {
       let dateArr = date.split('/');
       let filteredExpenses = expenses.filter(exp => {
         let expArr = exp.date.split('/');
+        if(exp.isReoccurring) {
+          expArr[0] = dateArr[0];
+          exp.date = expArr[0] + '/' + expArr[1] + '/' + expArr[2];
+        }
         if(expArr) {
           return expArr[0] === dateArr[0] && expArr[2] === dateArr[2]
         }
       });
-      this.setState({expensesForMonth: filteredExpenses});
+      this.setState({expensesForMonth: filteredExpenses, prevExpCount: this.state.user.expenses.length});
     }
   };
 
@@ -107,11 +118,11 @@ class CalendarView extends React.Component {
               user={user}
               displayExpenses={displayExpenses}
               editExpense={(expense) => {
-                editExpense();
+                editExpense(expense);
                 this.handleClose();
               }}
               deleteExpense={(expense) => {
-                deleteExpense(expense);
+                deleteExpense(this.state.user, expense);
                 this.handleClose();
               }}/>
           </Modal.Body>

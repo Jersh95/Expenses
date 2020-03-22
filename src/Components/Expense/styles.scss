@@ -45,6 +45,10 @@ div.DayPickerInput > input{
     color: inherit;
   }
 
+  .react-calendar__tile--now {
+    color: #0034d1;
+  }
+
   .react-calendar__tile__date {
     text-align: center;
     height: 35px;

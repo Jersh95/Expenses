@@ -34,10 +34,10 @@ export class UserProvider extends React.Component {
           .then(async result => {
             await readUser(result.user)
               .then(async (user) => {
-                await readExpenses(user).then(expenses => {
-                  const dbUser = result.user;
-                  this.setState({user: new User(dbUser.uid, dbUser.displayName, dbUser.email, expenses)});
-                });
+                // await readExpenses(user).then(expenses => {
+                //   const dbUser = result.user;
+                //   this.setState({user: new User(dbUser.uid, dbUser.displayName, dbUser.email, expenses)});
+                // });
               })
           })
           .catch((error) => {
